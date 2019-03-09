@@ -1,0 +1,32 @@
+import java.io.*;
+import java.util.Scanner;
+public class BinaryFilesReader {
+    public static void main(String[] args) throws IOException {
+        String filePath = "D:\\Users\\Programowanie\\IdeaProjects\\Files reader\\src\\test.txt";
+        Scanner numberIn = new Scanner(System.in);
+        System.out.println("Give some number:");
+        String number;
+        number = numberIn.nextLine();
+        DataOutputStream outputStream = null;
+        try {
+            outputStream = new DataOutputStream(new FileOutputStream(filePath));
+            outputStream.writeUTF(number);
+        } finally {
+            if (outputStream != null) {
+                outputStream.close();
+            }
+        }
+        String result = "";
+        DataInputStream inputStream = null;
+        try {
+
+            inputStream = new DataInputStream(new FileInputStream(filePath));
+            result = inputStream.readUTF();
+        } finally {
+            if (inputStream != null) {
+                inputStream.close();
+            }
+        }
+        System.out.println("File content: " + result);
+    }
+}
